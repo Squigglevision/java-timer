@@ -3,6 +3,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -15,7 +17,9 @@ public class timer  extends JFrame implements ActionListener{
     private JButton reset;
     private JLabel time;
     private JLabel Title;
-    private int sessionTime = 5; // 1200 seconds = 20 minutes
+    private JTextField textField;
+    private int sessionTime;
+    // private int sessionTime = 5;
     private int elapsedTime = sessionTime*1000;
     private int hours = elapsedTime/3600000;
     private int minutes = (elapsedTime/60000)%60;
@@ -38,18 +42,23 @@ public class timer  extends JFrame implements ActionListener{
         this.Title.setFont(new Font("Sans-serif", Font.BOLD, 18));
         this.add(this.Title);
 
-        this.start = new JButton("Start");
-        this.reset = new JButton("reset");
-        this.start.setBounds(100, 200, 100, 50);
-        this.reset.setBounds(200, 200, 100, 50);
-        this.add(this.start);
-        this.add(this.reset);
+        this.textField = new JTextField(20);
+        this.textField.setBounds(180, 125, 50, 20);
+        this.add(this.textField);
 
-        this.start.addActionListener(this);
-        this.reset.addActionListener(this);
         this.time = new JLabel(hoursStr + " : " + minutesStr + " : " + secondsStr);
-        this.time.setBounds(175, 100, 100, 100);
+        this.time.setBounds(175, 120, 100, 100);
         this.add(this.time);
+
+        this.start = new JButton("Start");
+        this.start.setBounds(100, 200, 100, 50);
+        this.add(this.start);
+        this.start.addActionListener(this);
+
+        this.reset = new JButton("reset");
+        this.reset.setBounds(200, 200, 100, 50);
+        this.add(this.reset);
+        this.reset.addActionListener(this);
     }
     Timer timer = new Timer(1000, new ActionListener() {
         @Override
